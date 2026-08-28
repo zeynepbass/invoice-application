@@ -1,4 +1,4 @@
-React Fatura Application, kullanıcıların ürünleri sepete ekleyerek sipariş oluşturabildiği, siparişlerini takip edebildiği ve fatura oluşturup yazdırabildiği kapsamlı bir e-ticaret ve faturalandırma web uygulamasıdır. Ürün ve kategori yönetimi için CRUD işlemleri sunmaktadır.
+Invoice Application, kullanıcıların ürünleri sepete ekleyerek sipariş oluşturabildiği, siparişlerini takip edebildiği ve fatura oluşturup yazdırabildiği kapsamlı bir e-ticaret ve faturalandırma web uygulamasıdır. Ürün ve kategori yönetimi için CRUD işlemleri sunmaktadır.
 
 ---
 
