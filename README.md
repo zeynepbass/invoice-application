@@ -1,6 +1,4 @@
-
-HTML, CSS, React, Node.js ve MongoDB kullanarak geliştirdiğim kapsamlı projemi sizlerle paylaşmaktan büyük heyecan duyuyorum!  
-Bu projede kullanıcılar giriş yapabilir ve kayıt olabilir. Ayrıca müşteriler sipariş oluşturabilir, ürünleri sepete ekleyebilir ve siparişlerini takip edebilir.
+React Fatura Application, kullanıcıların ürünleri sepete ekleyerek sipariş oluşturabildiği, siparişlerini takip edebildiği ve fatura oluşturup yazdırabildiği kapsamlı bir e-ticaret ve faturalandırma web uygulamasıdır. Ürün ve kategori yönetimi için CRUD işlemleri sunmaktadır.
 
 ---
 
