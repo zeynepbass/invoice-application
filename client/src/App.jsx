@@ -1,91 +1,42 @@
+import { lazy, Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import AppLayout from "./components/layout/AppLayout";
+import PageLoader from "./components/common/PageLoader";
+import HomePage from "./pages/HomePage";
+import CartPage from "./pages/CartPage";
+import BillsPage from "./pages/BillsPage";
+import CustomersPage from "./pages/CustomersPage";
+import ProductsPage from "./pages/ProductsPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import LoginPage from "./pages/auth/LoginPage";
+import RegisterPage from "./pages/auth/RegisterPage";
 
-import {Routes,Route,Navigate}  from "react-router-dom"
-import CartPage from "./pages/CartPage.jsx";
-import HomePage from "./pages/HomePage.jsx";
-import BillPage from "./pages/Billpage.jsx";
-import CustomerPage from "./pages/CustomerPage";
-import StatisticPage from "./pages/StatisticPage";
-import Register from "./pages/auth/Register";
-import Login from "./pages/auth/Login";
-import ProductPage from "./pages/ProductPage";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+const StatisticsPage = lazy(() => import("./pages/StatisticsPage"));
 
-
-
-function App() {
-  const cart = useSelector((state) => state.cart);
-
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
-
-  return (
-
-
-      <>
-      <Routes>
-      <Route
-          path="/"
-          element={
-            <RouteControl>
-              <HomePage />
-            </RouteControl>
-          }
-        />
-        <Route
-          path="/cart"
-          element={
-            <RouteControl>
-              <CartPage />
-            </RouteControl>
-          }
-        />
-        <Route
-          path="/bills"
-          element={
-            <RouteControl>
-              <BillPage />
-            </RouteControl>
-          }
-        />
-        <Route
-          path="/customers"
-          element={
-            <RouteControl>
-              <CustomerPage />
-            </RouteControl>
-          }
-        />
+const App = () => (
+  <Routes>
+    <Route path="/login" element={<LoginPage />} />
+    <Route path="/register" element={<RegisterPage />} />
+    <Route element={<ProtectedRoute />}>
+      <Route element={<AppLayout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/bills" element={<BillsPage />} />
+        <Route path="/customers" element={<CustomersPage />} />
+        <Route path="/products" element={<ProductsPage />} />
         <Route
           path="/statistic"
           element={
-            <RouteControl>
-              <StatisticPage />
-            </RouteControl>
+            <Suspense fallback={<PageLoader />}>
+              <StatisticsPage />
+            </Suspense>
           }
         />
-        <Route
-          path="/products"
-          element={
-            <RouteControl>
-              <ProductPage />
-            </RouteControl>
-          }
-        />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </>
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Route>
+  </Routes>
+);
 
-  );
-}
 export default App;
-//localstroge verımız varsa gırsın yoksa logın gırsın tek tek sayfalara yazmak yerıne boyle yaptır
-export const RouteControl = ({ children }) => {
-  if (localStorage.getItem("posUser")) {
-    return children;
-  } else {
-    return <Navigate to="/login" />
-  }
-};

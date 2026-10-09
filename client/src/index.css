@@ -1,50 +1,108 @@
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
-@tailwind base;
-@import url('https://fonts.googleapis.com/css2?family=Electrolize&display=swap');
-@import url("https://fonts.googleapis.com/css2?family=Electrolize&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Electrolize&display=swap");
-body {
-  margin: 0;
-  font-family: 'Electrolize', sans-serif;
-  @apply bg-gray-50;
-}
-  @media (min-width: 768px) {
-    body {
-      overflow: hidden;
-    }
-    .categories::-webkit-scrollbar {
-      display: none;
-    }
-    
-    .products::-webkit-scrollbar {
-      display: none;
-    }
-    
-}
-.ant-btn{
-  background-color:#D3D3D3;
-}
-.menu-links {
-  @apply flex justify-between items-center gap-7 md:static fixed z-50 bottom-0 md:w-auto w-screen md:bg-transparent bg-white left-0 md:border-t-0 border-t md:px-0 px-4 py-1;
-}
-.menu-link {
-  @apply flex flex-col hover:text-[#40a9ff] transition-all gap-y-[2px];
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+    border: 0 solid #e2e8f0;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: #0f172a;
+    background-color: #f8fafc;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  ul,
+  ol,
+  dl,
+  dd {
+    margin: 0;
+  }
+
+  ul,
+  ol {
+    padding: 0;
+    list-style: none;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  button {
+    font-family: inherit;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid #0f766e;
+    outline-offset: 2px;
+  }
 }
 
-.menu-link.active {
-  @apply !text-[#40a9ff];
-} 
+@layer components {
+  .surface {
+    @apply rounded-xl border border-slate-200 bg-white shadow-card;
+  }
 
-.category-item{
-  background-color: rgb(255, 255, 255);
+  .nav-link {
+    @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900;
+  }
+
+  .nav-link.active {
+    @apply bg-brand-50 text-brand-800;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
 }
-.category-item span{
-  color:rgb(0, 0, 0);
+
+.ant-table-wrapper .ant-table-thead > tr > th {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #475569;
+  background: #f8fafc;
 }
-h1{
-  color:gray !important;
-}
-.h1{
-  color:white !important;
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .invoice-document {
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .invoice-document tr {
+    break-inside: avoid;
+  }
 }
