@@ -1,42 +1,11 @@
-const User = require("../model/User.js");
 const router = require("express").Router();
-const bcrypt = require("bcryptjs");
-//! register
-router.post("/register", async (req, res) => {
-  try {
-    const { username, email, password } = req.body;
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-    const newUser = new User({
-      username,
-      email,
-      password: hashedPassword,
-    });
-    await newUser.save();
-    res.status(200).json("A new user created successfully.");
-  } catch (error) {
-    res.status(500).json(error);
-  }
-});
+const asyncHandler = require("../utils/asyncHandler");
+const { requireAuth } = require("../middleware/auth");
+const { register, login, logout, me } = require("../controllers/authController");
 
-router.post("/login", async (req, res) => {
-  try {
-    const user = await User.findOne({ email: req.body.email });
-    !user && res.status(404).send({ error: "User not found!" });
-
-    const validPassword = await bcrypt.compare(
-      req.body.password,
-      user.password
-    );
-
-    if (!validPassword) {
-      res.status(403).json("Invalid password!");
-    } else {
-      res.status(200).json(user);
-    }
-  } catch (error) {
-    res.status(400).json(error);
-  }
-});
+router.post("/register", asyncHandler(register));
+router.post("/login", asyncHandler(login));
+router.post("/logout", logout);
+router.get("/me", requireAuth, me);
 
 module.exports = router;
